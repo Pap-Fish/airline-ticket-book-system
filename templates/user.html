@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{u_name}}的主页</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">机票预订系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {{u_name}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/airticket/index/">首页</a></dd>
+                    <dd><a href="/airticket/user/">个人中心</a></dd>
+                    <dd><a href="/airticket/user/journey/">行程信息</a></dd>
+                    <dd><a href="/airticket/user/cpwd/">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/airticket/logout/">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/user/">基本资料</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/user/update/">修改身份信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/user/journey/">行程信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/user/cpwd/">修改密码</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">已绑定的旅客</div>
+        <div style="padding: 15px;">当前身份: {{p_name}}</div>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>民族</th>
+                <th>身份证号</th>
+                <th>工作单位</th>
+                <th>电话号码</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in passengers %}
+            <form action="/airticket/user/update/" method="post">
+                <tr>
+                    <td>{{p.2}}</td>
+                    <td>{{p.3}}</td>
+                    <td>{{p.4}}</td>
+                    <td>{{p.5}}</td>
+                    <td>{{p.6}}</td>
+                    <td>{{p.7}}</td>
+                    <td>
+                        <button type="sumbit" class="layui-btn layui-btn-sm layui-btn-normal" name="select"
+                                value="{{p.1}}">选择
+                        </button>
+                        <button type="sumbit" class="layui-btn layui-btn-sm layui-btn-normal" name="update"
+                                value="{{p.1}}">修改
+                        </button>
+                        <button type="sumbit" class="layui-btn layui-btn-sm layui-btn-danger" name="delete"
+                                value="{{p.1}}">解绑
+                        </button>
+                    </td>
+                </tr>
+            </form>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © boyuzhang.com
+    </div>
+</div>
+<script src="/static/layui.js"></script>
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+
+});
+
+layui.use('layer', function(){
+  var layer = layui.layer;
+  {% if msg %}
+  layer.msg('{{msg}}');
+  {% endif %}
+
+});
+
+</script>
+</body>
+</html>

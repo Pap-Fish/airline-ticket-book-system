@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{u_name}}的主页</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">机票预订系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {{u_name}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/airticket/index/">首页</a></dd>
+                    <dd><a href="/airticket/user/">个人中心</a></dd>
+                    <dd><a href="/airticket/user/journey/">行程信息</a></dd>
+                    <dd><a href="/airticket/user/cpwd/">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/airticket/logout/">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/user/">基本资料</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/user/update/">修改身份信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/user/journey/">行程信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/user/cpwd/">修改密码</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <form class="layui-form" action="/airticket/user/update/" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="p_name" placeholder="请输入姓名"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="p_sex" value="男" title="男" checked>
+                        <input type="radio" name="p_sex" value="女" title="女">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">民族</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="p_nation" placeholder="请输入民族"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">身份证号码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="p_idnumber" placeholder="请输入身份证号码"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工作单位</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="workplace" placeholder="请输入工作单位"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">电话号码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="telephone" placeholder="请输入电话号码"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo" name="sub" value="update">修改</button>
+                        <button class="layui-btn" lay-submit lay-filter="formDemo" name="sub" value="add">添加</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="/static/layui.js"></script>
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+
+});
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+
+});
+layui.use('layer', function(){
+  var layer = layui.layer;
+  {% if msg %}
+  layer.msg('{{msg}}');
+  {% endif %}
+
+});
+</script>
+</body>
+</html>

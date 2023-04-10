@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{u_name}}的主页</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">机票预订系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {{u_name}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/airticket/index/">首页</a></dd>
+                    <dd><a href="/airticket/user/">个人中心</a></dd>
+                    <dd><a href="/airticket/user/journey/">行程信息</a></dd>
+                    <dd><a href="/airticket/user/cpwd/">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/airticket/logout/">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/user/">基本资料</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/user/update/">修改身份信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/user/journey/">行程信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/user/cpwd/">修改密码</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>修改密码</legend>
+        </fieldset>
+        <div style="padding: 15px;">
+            <form action="/airticket/user/cpwd/" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="oldPassword" lay-verify="required" lay-verType="tips"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">新密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" lay-verify="pass" lay-verType="tips"
+                               autocomplete="off" id="LAY_password" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">3到16个字符</div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" type="sumbit">确认修改</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/layui.js"></script>
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+
+});
+layui.use('layer', function(){
+  var layer = layui.layer;
+  {% if msg %}
+  layer.msg('{{msg}}');
+  {% endif %}
+
+});
+</script>
+</body>
+</html>

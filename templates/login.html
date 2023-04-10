@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/login.css"/>
+</head>
+<body background="/static/Search_131.png">
+    <div id="title">
+        <h1>机票预订系统</h1>
+    </div>
+    <div id="login">
+        <h1>Login</h1>
+        <form id="form" action="/airticket/login/" method="post">
+            <input type="text" required="required" placeholder="用户名" name="uname"/>
+            <input type="password" required="required" placeholder="密码" name="pwd"/>
+            <button class="but" onclick="submitForm(this.value)" value="login">登录</button>
+            <br>
+            <button class="but" onclick="submitForm(this.value)" value="register">注册</button>
+
+        </form>
+    </div>
+
+</body>
+
+<script src="/static/layui.js"></script>
+<script>
+layui.use('layer', function(){
+  var layer = layui.layer;
+  {% if msg %}
+  layer.msg('{{msg}}');
+  {% endif %}
+
+});
+function submitForm(act){
+var f = document.getElementById('form');
+if(act == 'login') {
+f.action = '/airticket/login/';
+} else {
+f.action = '/airticket/register/';
+}
+f.submit();
+}
+</script>
+
+</html>

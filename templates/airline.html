@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>航空公司</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">机票预订系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {{u_name}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/airticket/index/">首页</a></dd>
+                    <dd><a href="/airticket/user/">个人中心</a></dd>
+                    <dd><a href="/airticket/user/journey/">行程信息</a></dd>
+                    <dd><a href="/airticket/user/cpwd/">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/airticket/logout/">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/index/">航班</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/index/airline/">航空公司</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">航空公司</div>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="150">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>公司编号</th>
+                <th>公司名称</th>
+                <th>公司地址</th>
+                <th>客服电话</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for a in airlines %}
+            <tr>
+                <td>{{a.0}}</td>
+                <td>{{a.1}}</td>
+                <td>{{a.2}}</td>
+                <td>{{a.3}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © boyuzhang.com
+    </div>
+</div>
+<script src="/static/layui.js"></script>
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+
+});
+</script>
+</body>
+</html>

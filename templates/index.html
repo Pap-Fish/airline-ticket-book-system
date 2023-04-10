@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>机票订购管理系统</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">机票预订系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {{u_name}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/airticket/index/">首页</a></dd>
+                    <dd><a href="/airticket/user/">个人中心</a></dd>
+                    <dd><a href="/airticket/user/journey/">行程信息</a></dd>
+                    <dd><a href="/airticket/user/cpwd/">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/airticket/logout/">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="/airticket/index/">航班</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/airticket/index/airline/">航空公司</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">现有航班</div>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>航班编号</th>
+                <th>始发站</th>
+                <th>目的站</th>
+                <th>起飞时间</th>
+                <th>预计到达时间</th>
+                <th>余票数</th>
+                <th>航空公司</th>
+                <th>航班状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for fl in flights %}
+            <tr>
+                <td><a class="" href="/airticket/index/buy?f_id={{fl.0}}">{{fl.0}}</a></td>
+                <td>{{fl.1}}</td>
+                <td>{{fl.2}}</td>
+                <td>{{fl.3}}</td>
+                <td>{{fl.4}}</td>
+                <td>{{fl.5}}</td>
+                <td>{{fl.6}}</td>
+                <td>{{fl.7}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="padding: 15px;">
+            <form action="/airticket/index/" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">航班编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="f_id" placeholder="请输入编号" autocomplete="off" class="layui-input" style="width:10%">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">始发站</label>
+                    <div class="layui-input-block">
+                        <select name="dep_station" lay-verify="required">
+                            <option value="">请选择城市</option>
+                            {% for fl in flights %}
+                            <option value="{{fl.1}}">{{fl.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">目的站</label>
+                    <div class="layui-input-block">
+                        <select name="dest_station" lay-verify="required">
+                            <option value="">请选择城市</option>
+                            {% for fl in flights %}
+                            <option value="{{fl.1}}">{{fl.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">航空公司</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="a_name" placeholder="请输入公司名称" autocomplete="off" class="layui-input" style="width:10%">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">起飞时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id='test5' name="dep_time" placeholder="年-月-日">
+                        </div>
+                    </div>
+                </div>
+                &emsp;&emsp;&emsp;<button type="sumbit" class="layui-btn layui-btn-radius layui-btn-normal" >查询</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © boyuzhang.com
+    </div>
+</div>
+<script src="/static/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+
+});
+layui.use('laydate', function(){
+    var laydate = layui.laydate;
+    laydate.render({
+    elem: '#test5'
+  });
+});
+
+layui.use('layer', function(){
+  var layer = layui.layer;
+  {% if msg %}
+  layer.msg('{{msg}}');
+  {% endif %}
+
+});
+
+</script>
+
+</body>
+</html>
