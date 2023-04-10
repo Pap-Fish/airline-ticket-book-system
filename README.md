@@ -25,8 +25,8 @@
        'default': {
            'ENGINE': 'django.db.backends.mysql',
            'NAME': 'airticket_book_sys',  # 自定义数据库连接名
-           'USER': 'root',  # 数据库连接账户
-           'PASSWORD': '#zby1721819634',  # 数据库连接密码
+           'USER': 'xxx',  # 数据库连接账户
+           'PASSWORD': 'xxxxxxxxxxxx',  # 数据库连接密码
            'HOST': '127.0.0.1',  # 数据库服务地址
            'PORT': '3306',  # 数据库连接端口
        }
